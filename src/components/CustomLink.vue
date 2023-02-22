@@ -1,10 +1,11 @@
 <template>
   <router-link
     v-slot="{ isActive, href, navigate }"
-    :to="to"
+    v-bind="$props"
     custom
   >
     <a
+      v-bind="$attrs"
       :href="href"
       class="nav-link"
       :class="isActive ? 'active' : 'text-white'"

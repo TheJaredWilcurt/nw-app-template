@@ -1,14 +1,17 @@
 <template>
   <nav :class="navClasses">
     <div class="container-fluid">
-      <a class="navbar-brand" href="#">
+      <CustomLink
+        to="/"
+        class="navbar-brand"
+      >
         <img
           src="@/assets/logo.png"
           class="d-inline-block align-text-top"
           alt="logo"
           style="height: 1.43em"
         />
-      </a>
+      </CustomLink>
       <button
         class="navbar-toggler"
         type="button"
@@ -77,8 +80,13 @@ import { mapState } from 'pinia';
 
 import { settingsStore } from '@/stores/appSettings.js';
 
+import CustomLink from '@/components/CustomLink.vue';
+
 export default {
   name: 'TopNav',
+  components: {
+    CustomLink
+  },
   computed: {
     navClasses: function () {
       const classes = [
