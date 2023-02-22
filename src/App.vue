@@ -1,7 +1,11 @@
 <template>
-  <TopNav />
-  <SideBar />
-  <RouterView />
+  <div class="container-fluid g-0">
+    <TopNav />
+    <div class="container-fluid g-0">
+      <SideBar />
+      <RouterView />
+    </div>
+  </div>
 </template>
 
 <script>

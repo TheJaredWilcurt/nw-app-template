@@ -18,7 +18,9 @@ const localStorageId = 'AppSettings';
 export const settingsStore = defineStore('settings', {
   state: function () {
     return {
-      theme: 'darkly'
+      theme: 'darkly',
+      navBarBackground: 'info',
+      navBarMode: 'dark'
     };
   },
   actions: {
@@ -65,19 +67,35 @@ export const settingsStore = defineStore('settings', {
       this.theme = theme;
       updateCss(theme);
       this.saveSettings();
+    },
+    setNavBarMode: function (mode) {
+      this.navBarMode = mode;
+      this.saveSettings();
+    },
+    setNavBarBackground: function (name) {
+      this.navBarBackground = name;
+      this.saveSettings();
     }
   },
   getters: {
     dataToSave: function (state) {
+      const {
+        theme,
+        navBarBackground,
+        navBarMode
+      } = state;
+      const copy = {
+        theme,
+        navBarBackground,
+        navBarMode
+      };
+      let output = '';
       try {
-        const copy = {
-          theme: state.theme
-        };
-        return JSON.stringify(copy, null, 2);
+        output = JSON.stringify(copy, null, 2);
       } catch (err) {
         console.log(err);
       }
-      return '';
+      return output;
     }
   }
 });
