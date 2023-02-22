@@ -1,9 +1,9 @@
 <template>
-  <div class="container-fluid g-0">
+  <div class="container-fluid d-flex flex-column g-0 vh-100">
     <TopNav />
-    <div class="container-fluid g-0">
+    <div class="container-fluid g-0 d-flex h-100">
       <SideBar />
-      <RouterView />
+      <RouterView class="container-fluid mt-3" />
     </div>
   </div>
 </template>

@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div>
     <h2>App Settings</h2>
     <SelectOption
       v-model="selectedStyle"

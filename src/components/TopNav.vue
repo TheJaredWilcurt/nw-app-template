@@ -83,7 +83,7 @@ export default {
     navClasses: function () {
       const classes = [
         'navbar',
-        'navbar-expand-lg',
+        'navbar-expand-sm',
         'navbar-' + this.navBarMode,
         'bg-' + this.navBarBackground
       ];
