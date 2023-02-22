@@ -2,16 +2,18 @@
 
 import { defineStore } from 'pinia';
 
-const isDesktop = !!window.nw;
+import { updateCss } from '@/helpers/applyTheme.js';
 
-function settingsFile () {
+const isDesktop = !!window.nw;
+const settingsFile = function () {
   if (isDesktop) {
     const path = window.require('path');
     const settingsFile = path.join(window.nw.App.dataPath, 'settings.json');
     return settingsFile;
   }
   return;
-}
+};
+const localStorageId = 'AppSettings';
 
 export const settingsStore = defineStore('settings', {
   state: function () {
@@ -21,10 +23,10 @@ export const settingsStore = defineStore('settings', {
   },
   actions: {
     loadSettings: function () {
+      let data;
       if (isDesktop) {
         const fs = window.require('fs');
         const location = settingsFile();
-        let data = {};
         try {
           if (fs.existsSync(location)) {
             data = JSON.parse(fs.readFileSync(location));
@@ -32,29 +34,50 @@ export const settingsStore = defineStore('settings', {
         } catch (err) {
           console.log(err);
         }
-        for (let key in data) {
-          console.log(key);
+      } else {
+        try {
+          data = window.localStorage.getItem(localStorageId);
+          data = JSON.parse(data);
+        } catch (err) {
+          console.log(err);
         }
       }
+      if (data) {
+        for (let key in data) {
+          this[key] = data[key];
+        }
+      }
+      updateCss(this.theme);
     },
     saveSettings: function () {
       if (isDesktop) {
         const fs = window.require('fs');
-        const location = settingsFile();
-        const data = this.settings;
-        fs.writeFileSync(location, data);
+        try {
+          fs.writeFileSync(settingsFile(), this.dataToSave);
+        } catch (err) {
+          console.log(err);
+        }
+      } else {
+        window.localStorage.setItem(localStorageId, this.dataToSave);
       }
     },
     setTheme: function (theme) {
       this.theme = theme;
+      updateCss(theme);
+      this.saveSettings();
     }
   },
   getters: {
-    settings: function (state) {
-      const copy = JSON.parse(JSON.stringify(state, null, 2));
-      delete copy._isOptionsAPI;
-      delete copy.$id;
-      return JSON.stringify(copy, null, 2);
+    dataToSave: function (state) {
+      try {
+        const copy = {
+          theme: state.theme
+        };
+        return JSON.stringify(copy, null, 2);
+      } catch (err) {
+        console.log(err);
+      }
+      return '';
     }
   }
 });

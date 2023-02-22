@@ -19,7 +19,7 @@ export default {
   computed: {
   },
   created: function () {
-    settingsStore().saveSettings();
+    settingsStore().loadSettings();
   }
 };
 </script>
