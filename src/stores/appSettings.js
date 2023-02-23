@@ -2,6 +2,8 @@
 
 import { defineStore } from 'pinia';
 
+import appConfig from '@/appConfig.js';
+
 import { updateCss } from '@/helpers/applyTheme.js';
 
 const isDesktop = !!window.nw;
@@ -18,9 +20,9 @@ const localStorageId = 'AppSettings';
 export const settingsStore = defineStore('settings', {
   state: function () {
     return {
-      theme: 'darkly',
-      navBarBackground: 'info',
-      navBarMode: 'dark'
+      theme: appConfig.theme,
+      navBarBackground: appConfig.navBarBackground,
+      navBarMode: appConfig.navBarMode
     };
   },
   actions: {

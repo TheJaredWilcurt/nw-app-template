@@ -20,9 +20,13 @@ export default {
     SideBar,
     TopNav
   },
-  computed: {
+  methods: {
+    setAppName: function () {
+      document.querySelector('head title').innerText = this.appConfig.appName;
+    }
   },
   created: function () {
+    this.setAppName();
     settingsStore().loadSettings();
   }
 };

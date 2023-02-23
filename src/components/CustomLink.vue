@@ -9,7 +9,7 @@
       :href="href"
       class="nav-link"
       :class="isActive ? 'active' : 'text-white'"
-      :aria-current="isActive ? page : false"
+      :aria-current="isActive ? 'page' : false"
       @click="navigate"
     >
       <slot></slot>
