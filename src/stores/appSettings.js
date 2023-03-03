@@ -22,7 +22,10 @@ export const settingsStore = defineStore('settings', {
     return {
       theme: appConfig.theme,
       navBarBackground: appConfig.navBarBackground,
-      navBarMode: appConfig.navBarMode
+      navBarMode: appConfig.navBarMode,
+      sidebarButton: appConfig.sidebarButton,
+      sidebarButtonActive: appConfig.sidebarButtonActive,
+      sidebarAdd: appConfig.sidebarAdd
     };
   },
   actions: {
@@ -65,6 +68,7 @@ export const settingsStore = defineStore('settings', {
         window.localStorage.setItem(localStorageId, this.dataToSave);
       }
     },
+
     setTheme: function (theme) {
       this.theme = theme;
       updateCss(theme);
@@ -77,6 +81,18 @@ export const settingsStore = defineStore('settings', {
     setNavBarBackground: function (name) {
       this.navBarBackground = name;
       this.saveSettings();
+    },
+    setSidebarButton: function (name) {
+      this.sidebarButton = name;
+      this.saveSettings();
+    },
+    setSidebarButtonActive: function (name) {
+      this.sidebarButtonActive = name;
+      this.saveSettings();
+    },
+    setSidebarAdd: function (name) {
+      this.sidebarAdd = name;
+      this.saveSettings();
     }
   },
   getters: {
@@ -84,12 +100,18 @@ export const settingsStore = defineStore('settings', {
       const {
         theme,
         navBarBackground,
-        navBarMode
+        navBarMode,
+        sidebarButton,
+        sidebarButtonActive,
+        sidebarAdd
       } = state;
       const copy = {
         theme,
         navBarBackground,
-        navBarMode
+        navBarMode,
+        sidebarButton,
+        sidebarButtonActive,
+        sidebarAdd
       };
       let output = '';
       try {

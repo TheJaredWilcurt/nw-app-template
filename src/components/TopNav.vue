@@ -13,20 +13,14 @@
         />
       </CustomLink>
       <div class="collapse navbar-collapse">
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-          <li class="nav-item">
-            <strong class="nav-link">
-              {{ appConfig.appName }}
-            </strong>
-          </li>
-          <li class="nav-item">
-            <CustomLink to="/settings">
-              Settings
-            </CustomLink>
-          </li>
-          <li class="nav-item">
-            <CustomLink to="/about">
-              About
+        <ul class="navbar-nav me-auto mb-0">
+          <li
+            v-for="(link, linkIndex) in links"
+            class="nav-item"
+            :key="'link' + linkIndex"
+          >
+            <CustomLink :to="link.path">
+              {{ link.label }}
             </CustomLink>
           </li>
         </ul>
@@ -48,6 +42,22 @@ export default {
     CustomLink
   },
   computed: {
+    links: function () {
+      return [
+        {
+          label: this.appConfig.appName,
+          path: '/'
+        },
+        {
+          label: 'Settings',
+          path: '/settings'
+        },
+        {
+          label: 'About',
+          path: '/about'
+        }
+      ];
+    },
     navClasses: function () {
       const classes = [
         'navbar',

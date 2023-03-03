@@ -11,13 +11,31 @@
       v-model="navBarBackground"
       id="app-settings-navigation-background"
       label="Navigation Background"
-      :list="navBarBackgroundsList"
+      :list="allowedColors"
     />
     <SelectOption
       v-model="navBarMode"
       id="app-settings-navigation-mode"
       label="Navigation Mode"
       :list="['light', 'dark']"
+    />
+    <SelectOption
+      v-model="sidebarButton"
+      id="app-settings-sidebar-button"
+      label="Sidebar Button"
+      :list="allowedColors"
+    />
+    <SelectOption
+      v-model="sidebarButtonActive"
+      id="app-settings-sidebar-button-active"
+      label="Sidebar Button (active)"
+      :list="allowedColors"
+    />
+    <SelectOption
+      v-model="sidebarAdd"
+      id="app-settings-sidebar-add"
+      label="Sidebar Add"
+      :list="allowedColors"
     />
   </div>
 </template>
@@ -54,7 +72,31 @@ export default {
         settingsStore().setNavBarBackground(value);
       }
     },
-    navBarBackgroundsList: function () {
+    sidebarButton: {
+      get: function () {
+        return settingsStore().sidebarButton;
+      },
+      set: function (value) {
+        settingsStore().setSidebarButton(value);
+      }
+    },
+    sidebarButtonActive: {
+      get: function () {
+        return settingsStore().sidebarButtonActive;
+      },
+      set: function (value) {
+        settingsStore().setSidebarButtonActive(value);
+      }
+    },
+    sidebarAdd: {
+      get: function () {
+        return settingsStore().sidebarAdd;
+      },
+      set: function (value) {
+        settingsStore().setSidebarAdd(value);
+      }
+    },
+    allowedColors: function () {
       return [
         'dark',
         'light',
