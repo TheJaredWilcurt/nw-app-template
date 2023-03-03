@@ -25,7 +25,8 @@ export const settingsStore = defineStore('settings', {
       navBarMode: appConfig.navBarMode,
       sidebarButton: appConfig.sidebarButton,
       sidebarButtonActive: appConfig.sidebarButtonActive,
-      sidebarAdd: appConfig.sidebarAdd
+      sidebarAdd: appConfig.sidebarAdd,
+      projects: []
     };
   },
   actions: {
@@ -92,6 +93,24 @@ export const settingsStore = defineStore('settings', {
     },
     setSidebarAdd: function (name) {
       this.sidebarAdd = name;
+      this.saveSettings();
+    },
+    addProject: function (project) {
+      this.projects.push(project);
+      this.saveSettings();
+    },
+    updateProject: function (project) {
+      const index = this.projects.findIndex(function (proj) {
+        return proj.id === project.id;
+      });
+      this.projects[index] = project;
+      this.saveSettings();
+    },
+    deleteProject: function (project) {
+      const index = this.projects.findIndex(function (proj) {
+        return proj.id === project.id;
+      });
+      this.projects[index].splice(index, 1);
       this.saveSettings();
     }
   },

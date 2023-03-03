@@ -31,7 +31,6 @@ export default {
   // The Project details page
   project: {
     // The name of the project details page
-    title: 'Project Settings',
-
+    title: 'Project Settings'
   }
 };
