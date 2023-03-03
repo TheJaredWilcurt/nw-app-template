@@ -3,36 +3,42 @@
     <h2>App Settings</h2>
     <div class="row">
       <SelectOption
+        v-if="appConfig?.settings?.showTheme"
         v-model="selectedStyle"
         id="app-settings-style-swapper"
         label="Style Swapper"
         :list="swatches"
       />
       <SelectOption
+        v-if="appConfig?.settings?.showNavBarBackground"
         v-model="navBarBackground"
         id="app-settings-navigation-background"
         label="Navigation Background"
         :list="allowedColors"
       />
       <SelectOption
+        v-if="appConfig?.settings?.showNavBarMode"
         v-model="navBarMode"
         id="app-settings-navigation-mode"
         label="Navigation Mode"
         :list="['light', 'dark']"
       />
       <SelectOption
+        v-if="appConfig?.settings?.showSidebarButton"
         v-model="sidebarButton"
         id="app-settings-sidebar-button"
         label="Sidebar Button"
         :list="allowedColors"
       />
       <SelectOption
+        v-if="appConfig?.settings?.showSidebarButtonActive"
         v-model="sidebarButtonActive"
         id="app-settings-sidebar-button-active"
         label="Sidebar Button (active)"
         :list="allowedColors"
       />
       <SelectOption
+        v-if="appConfig?.settings?.showSidebarAdd"
         v-model="sidebarAdd"
         id="app-settings-sidebar-add"
         label="Sidebar Add"

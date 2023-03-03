@@ -41,22 +41,38 @@ export default {
   components: {
     CustomLink
   },
+  methods: {
+    showingAtLeastOneSetting: function () {
+      const values = [];
+      for (const setting in this.appConfig?.settings) {
+        values.push(this.appConfig?.settings[setting]);
+      }
+      return !!values.filter(Boolean).length;
+    }
+  },
   computed: {
     links: function () {
+      const home = {
+        label: this.appConfig.appName,
+        path: '/'
+      };
+      const about = {
+        label: 'About',
+        path: '/about'
+      };
+      let settings = {
+        label: 'Settings',
+        path: '/settings'
+      };
+      if (!this.showingAtLeastOneSetting()) {
+        settings = null;
+      }
+
       return [
-        {
-          label: this.appConfig.appName,
-          path: '/'
-        },
-        {
-          label: 'Settings',
-          path: '/settings'
-        },
-        {
-          label: 'About',
-          path: '/about'
-        }
-      ];
+        home,
+        settings,
+        about
+      ].filter(Boolean);
     },
     navClasses: function () {
       const classes = [

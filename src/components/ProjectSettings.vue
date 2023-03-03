@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h2>Project Settings</h2>
+    <h2>{{ appConfig?.project?.title }}</h2>
     {{ $route.params.id }}
   </div>
 </template>
