@@ -1,42 +1,44 @@
 <template>
   <div>
     <h2>App Settings</h2>
-    <SelectOption
-      v-model="selectedStyle"
-      id="app-settings-style-swapper"
-      label="Style Swapper"
-      :list="swatches"
-    />
-    <SelectOption
-      v-model="navBarBackground"
-      id="app-settings-navigation-background"
-      label="Navigation Background"
-      :list="allowedColors"
-    />
-    <SelectOption
-      v-model="navBarMode"
-      id="app-settings-navigation-mode"
-      label="Navigation Mode"
-      :list="['light', 'dark']"
-    />
-    <SelectOption
-      v-model="sidebarButton"
-      id="app-settings-sidebar-button"
-      label="Sidebar Button"
-      :list="allowedColors"
-    />
-    <SelectOption
-      v-model="sidebarButtonActive"
-      id="app-settings-sidebar-button-active"
-      label="Sidebar Button (active)"
-      :list="allowedColors"
-    />
-    <SelectOption
-      v-model="sidebarAdd"
-      id="app-settings-sidebar-add"
-      label="Sidebar Add"
-      :list="allowedColors"
-    />
+    <div class="row">
+      <SelectOption
+        v-model="selectedStyle"
+        id="app-settings-style-swapper"
+        label="Style Swapper"
+        :list="swatches"
+      />
+      <SelectOption
+        v-model="navBarBackground"
+        id="app-settings-navigation-background"
+        label="Navigation Background"
+        :list="allowedColors"
+      />
+      <SelectOption
+        v-model="navBarMode"
+        id="app-settings-navigation-mode"
+        label="Navigation Mode"
+        :list="['light', 'dark']"
+      />
+      <SelectOption
+        v-model="sidebarButton"
+        id="app-settings-sidebar-button"
+        label="Sidebar Button"
+        :list="allowedColors"
+      />
+      <SelectOption
+        v-model="sidebarButtonActive"
+        id="app-settings-sidebar-button-active"
+        label="Sidebar Button (active)"
+        :list="allowedColors"
+      />
+      <SelectOption
+        v-model="sidebarAdd"
+        id="app-settings-sidebar-add"
+        label="Sidebar Add"
+        :list="allowedColors"
+      />
+    </div>
   </div>
 </template>
 
