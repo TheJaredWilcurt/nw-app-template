@@ -1,7 +1,7 @@
 import { createPinia } from 'pinia';
 import { createApp } from 'vue';
 
-import router from '@/router.js';
+import router from '@/router/index.js';
 
 import applyPrototypes from '@/helpers/applyPrototypes.js';
 

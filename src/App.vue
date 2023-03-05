@@ -11,8 +11,8 @@
 <script>
 import { settingsStore } from '@/stores/appSettings.js';
 
-import SideBar from '@/components/SideBar.vue';
-import TopNav from '@/components/TopNav.vue';
+import SideBar from '@/components/layout/SideBar.vue';
+import TopNav from '@/components/layout/TopNav.vue';
 
 export default {
   name: 'App',
