@@ -3,7 +3,10 @@
     <TopNav />
     <div class="container-fluid g-0 d-flex h-100">
       <SideBar />
-      <RouterView class="container-fluid mt-3" />
+      <RouterView
+        class="container-fluid mt-3"
+        :key="$route.fullPath"
+      />
     </div>
   </div>
 </template>

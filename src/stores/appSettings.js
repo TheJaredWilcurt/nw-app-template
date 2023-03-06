@@ -23,6 +23,7 @@ export const settingsStore = defineStore('settings', {
       theme: appConfig.theme,
       navBarBackground: appConfig.navBarBackground,
       navBarMode: appConfig.navBarMode,
+      sidebarWidth: appConfig.sidebarWidth,
       sidebarButton: appConfig.sidebarButton,
       sidebarButtonActive: appConfig.sidebarButtonActive,
       sidebarAdd: appConfig.sidebarAdd,
@@ -95,9 +96,15 @@ export const settingsStore = defineStore('settings', {
       this.sidebarAdd = name;
       this.saveSettings();
     },
-    addProject: function (project) {
-      this.projects.push(project);
-      this.saveSettings();
+
+    createProject: async function (project) {
+      const id = this.highestProjectId + 1;
+      this.projects.push({
+        ...project,
+        id
+      });
+      await this.saveSettings();
+      return id;
     },
     updateProject: function (project) {
       const index = this.projects.findIndex(function (proj) {
@@ -108,9 +115,9 @@ export const settingsStore = defineStore('settings', {
     },
     deleteProject: function (project) {
       const index = this.projects.findIndex(function (proj) {
-        return proj.id === project.id;
+        return proj.id == project.id;
       });
-      this.projects[index].splice(index, 1);
+      this.projects.splice(index, 1);
       this.saveSettings();
     }
   },
@@ -122,7 +129,8 @@ export const settingsStore = defineStore('settings', {
         navBarMode,
         sidebarButton,
         sidebarButtonActive,
-        sidebarAdd
+        sidebarAdd,
+        projects
       } = state;
       const copy = {
         theme,
@@ -130,7 +138,8 @@ export const settingsStore = defineStore('settings', {
         navBarMode,
         sidebarButton,
         sidebarButtonActive,
-        sidebarAdd
+        sidebarAdd,
+        projects
       };
       let output = '';
       try {
@@ -139,6 +148,15 @@ export const settingsStore = defineStore('settings', {
         console.log(err);
       }
       return output;
+    },
+    highestProjectId: function (state) {
+      let id = 0;
+      state.projects.forEach(function (project) {
+        if (project.id > id) {
+          id = project.id;
+        }
+      });
+      return id;
     }
   }
 });

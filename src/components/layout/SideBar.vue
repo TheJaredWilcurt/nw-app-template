@@ -1,16 +1,19 @@
 <template>
-  <aside class="d-flex flex-column flex-shrink-0 p-3 text-white bg-dark h-100" style="width: 280px;">
+  <aside
+    class="d-flex flex-column flex-shrink-0 p-3 text-white bg-dark h-100"
+    :style="'width: ' + sidebarWidth + 'px;'"
+  >
     <div class="btn-group-vertical">
       <button
-        v-for="(project, index) in projects"
-        :class="buttonClasses(project.to)"
-        @click="go(project.to)"
-        :key="project.name + index"
+        v-for="project in projects"
+        :class="buttonClasses(project.id)"
+        @click="go('/project/' + project.id)"
+        :key="'project' + project.id"
       >
-        {{ project.name }}
+        {{ project.projectName }}
       </button>
     </div>
-    <hr />
+    <hr v-if="projects.length" />
     <div class="btn-group-vertical">
       <button
         :class="'btn btn-' + sidebarAdd"
@@ -30,12 +33,13 @@ import { settingsStore } from '@/stores/appSettings.js';
 export default {
   name: 'SideBar',
   methods: {
-    buttonClasses: function (to) {
+    buttonClasses: function (id) {
       const classes = [
-        'btn'
+        'btn',
+        'text-truncate'
       ];
 
-      if (this.currentPage === to) {
+      if (this.currentPage.endsWith('/' + id)) {
         classes.push('btn-' + this.sidebarButtonActive);
       } else {
         classes.push('btn-' + this.sidebarButton);
@@ -43,35 +47,20 @@ export default {
 
       return classes.join(' ');
     },
-    go: function (to) {
-      this.$router.push({ path: to });
-      console.log(this.$route);
+    go: function (path) {
+      this.$router.push({ path });
     }
   },
   computed: {
     currentPage: function () {
       return this.$route.fullPath;
     },
-    projects: function () {
-      return [
-        {
-          name: '22',
-          to: '/project/22'
-        },
-        {
-          name: '88',
-          to: '/project/88'
-        },
-        {
-          name: 'Lorem Ipsom',
-          to: '/project/123456'
-        }
-      ];
-    },
     ...mapState(settingsStore, [
+      'sidebarWidth',
       'sidebarButton',
       'sidebarButtonActive',
-      'sidebarAdd'
+      'sidebarAdd',
+      'projects'
     ])
   }
 };
